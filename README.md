@@ -11,9 +11,9 @@ LPF: This knob determines the volume of the low-pass filter post-distortion.
 
 HPF: This knob determines the volume of the high-pass filter post-distortion.
 
-Cutoff: The cutoff knob is used to determine the cutoff/crossover over frequency used by the low-pass and high-pass filter.
+Cutoff: The cutoff knob is used to determine the cutoff/crossover frequency used by the low-pass and high-pass filter.
 
-Drive: This knob work differently depending on which distortion plugin is chosen. However, it generally determines the shaping level of the distortion effect.
+Drive: This knob works differently depending on which distortion plugin is chosen. However, it generally determines the shaping level of the distortion effect.
 
 Blend: The blend knob determines the ratio of dry to wet signal being output from the plugin.
 
