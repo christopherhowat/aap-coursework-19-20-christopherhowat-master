@@ -1,0 +1,164 @@
+/*
+  ==============================================================================
+
+    This file was auto-generated!
+
+    It contains the basic framework code for a JUCE plugin editor.
+
+  ==============================================================================
+*/
+
+#include "PluginProcessor.h"
+#include "PluginEditor.h"
+
+//==============================================================================
+SpectralDistortionAudioProcessorEditor::SpectralDistortionAudioProcessorEditor (SpectralDistortionAudioProcessor& p, 
+    AudioProcessorValueTreeState& vts)
+: AudioProcessorEditor (&p), processor (p), treeState(vts)
+
+{
+
+    setSize(800, 400);
+
+    getLookAndFeel().setColour(Slider::thumbColourId, Colours::whitesmoke);
+
+    // Cutoff Frequency
+    lowvolumeValue = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(treeState, "lowVolume", lowvolumeKnob);
+    lowvolumeKnob.setSliderStyle(Slider::RotaryVerticalDrag);
+    lowvolumeKnob.setRange(0.0f, 1.0f, 0.0f);
+    lowvolumeKnob.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+    addAndMakeVisible(&lowvolumeKnob);
+
+    // Resonance
+    highvolumeValue = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(treeState, "highVolume", highvolumeKnob);
+    highvolumeKnob.setSliderStyle(Slider::RotaryVerticalDrag);
+    highvolumeKnob.setRange(0.0f, 1.0f, 0.0f);
+    highvolumeKnob.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+    addAndMakeVisible(&highvolumeKnob);
+
+    
+    driveValue = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(treeState, "drive", driveKnob);
+    driveKnob.setSliderStyle(Slider::RotaryVerticalDrag);
+    driveKnob.setRange (0.0f, 1.0f, 0.0f);
+    driveKnob.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+    addAndMakeVisible(&driveKnob);
+    
+    cutoffValue = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(treeState, "cutoff", cutoffKnob);
+    cutoffKnob.setSliderStyle(Slider::RotaryVerticalDrag);
+    cutoffKnob.setRange (20.0f, 20000.0f, 0.0f);
+    cutoffKnob.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+    addAndMakeVisible(&cutoffKnob);
+
+    blendValue = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(treeState, "blend", blendKnob);
+    blendKnob.setSliderStyle(Slider::RotaryVerticalDrag);
+    blendKnob.setRange (0.0f, 1.0f, 0.0f);
+    blendKnob.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+    addAndMakeVisible(&blendKnob);
+    
+    gainValue = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(treeState, "gain", gainKnob);
+    gainKnob.setSliderStyle(Slider::RotaryVerticalDrag);
+    gainKnob.setRange (0.0f, 3.0f, 0.0f);
+    gainKnob.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+    addAndMakeVisible(&gainKnob);
+    
+
+    addAndMakeVisible(&disChoice); // 1
+    disChoice.addItem("Soft Clip", 1);
+    disChoice.addItem("Hard Clip", 2);
+    disChoice.addItem("Half - Wave Rect", 3); 
+    disChoice.setSelectedId(1);
+    disChoice.addListener(this);
+
+}
+
+SpectralDistortionAudioProcessorEditor::~SpectralDistortionAudioProcessorEditor()
+{
+}
+
+//==============================================================================
+void SpectralDistortionAudioProcessorEditor::paint (Graphics& g)
+{
+    // (Our component is opaque, so we must completely fill the background with a solid colour)
+    g.fillAll(Colour(230, 195, 225));
+
+
+
+
+    g.setFont(Font("Helvetica", 30.0f, Font::italic));
+    g.setColour(Colour(250, 247, 97));
+    g.drawFittedText("Spectral Distortion :~)", 175, 32, 300, 10, Justification::centred, 1, 0.0f);
+
+    //Rectangle <float> area(425, 180, 80, 80);
+    //g.setColour(Colours::yellowgreen);
+    //g.drawRoundedRectangle(area, 40.0f, 15.0f);
+        
+    Rectangle <float> area2(((getWidth() / 7) * 1) - (25), (getHeight() / 2) - 25, 50, 50);
+    g.setColour(Colour(252, 182, 76));
+    g.drawRoundedRectangle(area2, 100.0f, 10.0f);
+
+   Rectangle <float> area3(((getWidth() / 7) * 1.5) - (115), (getHeight() / 2) - 60, 230, 140);
+    g.setColour(Colours::orangered);
+    g.drawRoundedRectangle(area3, 7.0f, 5.0f);
+        
+    Rectangle <float> area4(0, 0, 800, 400);
+    g.setColour(Colour(66, 135, 245));
+    g.drawRoundedRectangle(area4, 10.0f, 20.0f);  
+
+    Rectangle <float> area5(((getWidth() / 7) * 2) - (25), (getHeight() / 2) - 25, 50, 50);
+    g.setColour(Colour(252, 182, 76));
+    g.drawRoundedRectangle(area5, 100.0f, 10.0f);
+
+    Rectangle <float> area6(((getWidth() / 7) * 3) - (25), (getHeight() / 2) - 25, 50, 50);
+    g.setColour(Colour(252, 182, 76));
+    g.drawRoundedRectangle(area6, 100.0f, 10.0f);
+
+    Rectangle <float> area7(((getWidth() / 7) * 4) - (25), (getHeight() / 2) - 25, 50, 50);
+    g.setColour(Colour(252, 182, 76));
+    g.drawRoundedRectangle(area7, 100.0f, 10.0f);    
+    
+    Rectangle <float> area8(((getWidth() / 7) * 5) - (25), (getHeight() / 2) - 25, 50, 50);
+    g.setColour(Colour(252, 182, 76));
+    g.drawRoundedRectangle(area8, 100.0f, 10.0f);    
+    
+    Rectangle <float> area9(((getWidth() / 7) * 6) - (25), (getHeight() / 2) - 25, 50, 50);
+    g.setColour(Colour(252, 182, 76));
+    g.drawRoundedRectangle(area9, 100.0f, 10.0f);
+    
+ 
+
+    g.setColour(Colours::black);
+    g.setFont(15.0f);
+
+
+
+    g.drawText("LPF", ((getWidth() / 7) * 1) - (100 / 2), (getHeight() / 2) + 5, 100, 100, Justification::centred, false);
+    g.drawText("HPF", ((getWidth() / 7) * 2) - (100 / 2), (getHeight() / 2) + 5, 100, 100, Justification::centred, false);
+    g.drawText("Drive", ((getWidth() / 7) * 3) - (100 / 2), (getHeight() / 2) + 5, 100, 100, Justification::centred, false);
+    g.drawText("Cutoff", ((getWidth() / 7) * 4) - (100 / 2), (getHeight() / 2) + 5, 100, 100, Justification::centred, false);
+    g.drawText("Blend", ((getWidth() / 7) * 5) - (100 / 2), (getHeight() / 2) + 5, 100, 100, Justification::centred, false);
+    g.drawText("Gain", ((getWidth() / 7) * 6) - (100 / 2), (getHeight() / 2) + 5, 100, 100, Justification::centred, false);
+
+
+}
+
+void SpectralDistortionAudioProcessorEditor::resized()
+{
+    // This is generally where you'll want to lay out the positions of any
+    // subcomponents in your editor..
+
+  
+
+    lowvolumeKnob.setBounds(((getWidth() / 7) * 1) - (100 / 2), (getHeight() / 2) - (100 / 2), 100, 100);
+    highvolumeKnob.setBounds(((getWidth() / 7) * 2) - (100 / 2), (getHeight() / 2) - (100 / 2), 100, 100);
+    driveKnob.setBounds(((getWidth() / 7) * 3) - (100 / 2), (getHeight() / 2) - (100 / 2), 100, 100);
+    cutoffKnob.setBounds(((getWidth() / 7) * 1.5) - (100 / 2), (getHeight() / 2) + (50), 100, 100);    
+    blendKnob.setBounds(((getWidth() / 7) * 5) - (100 / 2), (getHeight() / 2) - (100 / 2), 100, 100);
+    gainKnob.setBounds(((getWidth() / 7) * 6) - (100 / 2), (getHeight() / 2) - (100 / 2), 100, 100);
+    disChoice.setBounds(25, 25, 140, 25);
+}
+
+void SpectralDistortionAudioProcessorEditor::comboBoxChanged(ComboBox* comboBoxThatHasChanged)
+{
+    processor.menuChoice = comboBoxThatHasChanged->getSelectedId();
+
+}
