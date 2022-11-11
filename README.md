@@ -19,4 +19,4 @@ Blend: The blend knob determines the ratio of dry to wet signal being output fro
 
 Gain: This knob adjusts the output level.
 
-![image](https://user-images.githubusercontent.com/61229580/201404472-11023c56-d8a1-41c9-8898-2db53bd8c526.png)
+![image](https://user-images.githubusercontent.com/61229580/201404584-e0680a9d-faf2-4dc3-83a2-604a3d9efc17.png)
