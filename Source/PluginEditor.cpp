@@ -84,7 +84,7 @@ void SpectralDistortionAudioProcessorEditor::paint (Graphics& g)
 
     g.setFont(Font("Helvetica", 30.0f, Font::italic));
     g.setColour(Colours::darkgrey);
-    g.drawFittedText("Spectral Distortion :~)", 260, 30, 300, 10, Justification::centred, 1, 0.0f);
+    g.drawFittedText("Spectral Distortion", 260, 30, 300, 10, Justification::centred, 1, 0.0f);
 
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="wLAzsz" name="SpectralDistortion" projectType="audioplug"
-              jucerVersion="5.4.5">
+              displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="h1qWao" name="SpectralDistortion">
     <GROUP id="{2EF0FAE2-7B06-EF00-FB2D-D7D789515E4A}" name="Source">
       <FILE id="pGXyJM" name="PluginProcessor.cpp" compile="1" resource="0"
