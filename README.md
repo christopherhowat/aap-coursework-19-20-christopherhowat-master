@@ -18,3 +18,5 @@ Drive: This knob work differently depending on which distortion plugin is chosen
 Blend: The blend knob determines the ratio of dry to wet signal being output from the plugin.
 
 Gain: This knob adjusts the output level.
+
+![image](https://user-images.githubusercontent.com/61229580/201404472-11023c56-d8a1-41c9-8898-2db53bd8c526.png)
